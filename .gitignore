@@ -3,3 +3,5 @@ obj/
 .vs/
 /input.txt
 /Day00.cs
+.sln
+.csproj
