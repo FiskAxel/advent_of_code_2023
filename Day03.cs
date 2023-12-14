@@ -1,10 +1,11 @@
+using System.Dynamic;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
 class Day03
 {
     static Regex regexNumber = new Regex(@"(\d+)");
-    
+
     public static void Solve(string[] input)
     {
         Console.WriteLine("DAY03");
@@ -39,7 +40,7 @@ class Day03
 
                 if (match.Groups[0].Value == "*")
                 {
-                    gears.Add(new Position(y, x));
+                    gears.Add(new Position(x, y));
                 }
             }
         }
@@ -68,30 +69,48 @@ class Day03
         sum = 0;
         foreach (Position p in gears)
         {
-            if (NumberOfAdjacentPartNums(p, input) == 2)
+            string a = "";
+            string b = input[p.y].Substring(p.x - 1, 3);
+            string c = "";
+            if (p.y != 0)
+                a = input[p.y - 1].Substring(p.x - 1, 3);
+            if (p.y < input.Length - 1)
+                c = input[p.y + 1].Substring(p.x - 1, 3);
+            MatchCollection m1 = regexNumber.Matches(a);
+            MatchCollection m2 = regexNumber.Matches(b);
+            MatchCollection m3 = regexNumber.Matches(c);
+            int num = m1.Count() + m2.Count() + m3.Count();
+            if (num == 2)
             {
-                //int gearRatio = num1 * num2;
-                sum += 1; // gear ratio
+                int gearRatio = 1;
+                foreach (Match m in m1)
+                    gearRatio *= GetGearRatio(p.x - 1 + m.Index, input[p.y - 1]);
+                foreach (Match m in m2)
+                    gearRatio *= GetGearRatio(p.x - 1 + m.Index, input[p.y]);
+                foreach (Match m in m3)
+                    gearRatio *= GetGearRatio(p.x - 1 + m.Index, input[p.y + 1]);
+                sum += gearRatio;
             }
         }
         Console.WriteLine($"Part2: {sum}");
     }
 
-    static int NumberOfAdjacentPartNums(Position p, string[] input)
-    {   
-        string a = "";
-        string b = input[p.y].Substring(p.x - 1, 3);
-        string c = "";
-        if (p.y != 0) 
-            a = input[p.y - 1].Substring(p.x - 1, 3);
-        if (p.y < input.Length - 1) 
-            c = input[p.y + 1].Substring(p.x - 1, 3);
-
-        int num = 0;
-        num += regexNumber.Matches(a).Count();
-        num += regexNumber.Matches(b).Count();
-        num += regexNumber.Matches(c).Count();
-        return num;
+    static int GetGearRatio(int index, string row)
+    {
+        int i = index;
+        string num = "";
+        while (i >= 0 && Char.IsDigit(row[i]))
+        {
+            num = row[i] + num;
+            i--;
+        }
+        i = index + 1;
+        while (i < row.Length && Char.IsDigit(row[i]))
+        {
+            num += row[i];
+            i++;
+        }
+        return int.Parse(num);
     }
 
     class Number
