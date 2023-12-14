@@ -2,12 +2,12 @@
 {
     public static void Main()
     {
-        Day01.Solve(GetInput("input01.txt")); // 55130  54985
-        Day02.Solve(GetInput("input02.txt")); // 2204   71036
+        Day01.Solve(GetInput("input01.txt")); // 55130      54985
+        Day02.Solve(GetInput("input02.txt")); // 2204       71036
         Day03.Solve(GetInput("input03.txt")); // 550064     123456
-        Day04.Solve(GetInput("input04.txt")); // 20117  13768818 
-        Day05.Solve(GetInput("input05.txt")); // 
-        //Day06.Solve(GetInput("input06.txt")); // 
+        Day04.Solve(GetInput("input04.txt")); // 20117      13768818 
+        //Day05.Solve(GetInput("input05.txt")); // 
+        Day06.Solve(GetInput("input06.txt")); // 227850     42948149
         //Day07.Solve(GetInput("input07.txt")); // 
         //Day08.Solve(GetInput("input08.txt")); // 
         //Day09.Solve(GetInput("input09.txt")); // 
