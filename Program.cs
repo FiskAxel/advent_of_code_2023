@@ -8,7 +8,7 @@
         Day04.Solve(GetInput("input04.txt")); // 20117      13768818 
         //Day05.Solve(GetInput("input05.txt")); // 
         Day06.Solve(GetInput("input06.txt")); // 227850     42948149
-        //Day07.Solve(GetInput("input07.txt")); // 
+        Day07.Solve(GetInput("input07.txt")); // 252052080  252898370
         Day08.Solve(GetInput("input08.txt")); // 20093      22103062509257
         Day09.Solve(GetInput("input09.txt")); // 1868368343 1022
         //Day10.Solve(GetInput("input10.txt")); // 
